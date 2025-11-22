@@ -1,22 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Counter from './Counter';
 
 function App() {
+  // State: manage the counter value in the parent component
+  const [count, setCount] = useState(0);
+
+  // Handlers passed down to the child via props
+  const increment = () => setCount(prev => prev + 1);
+  const decrement = () => setCount(prev => prev - 1);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>React Counter App</h1>
+        <p>Demonstration of props and state (parent → child)</p>
+
+        {/* Pass data and handlers to the child component via props */}
+        <Counter
+          label="Main Counter"
+          value={count}
+          onIncrement={increment}
+          onDecrement={decrement}
+        />
       </header>
     </div>
   );
